@@ -9,7 +9,7 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts") //we tell the application to require express-ejs-layouts, so it can be used
 const env = require("dotenv").config()
 const app = express()
-const static = require("./routes/static")
+const static = require("./routes/static") //a route file named "static" is imported and stored into a "static" variable
 
 /* ***********************
  * View Engine and Templates
@@ -21,7 +21,16 @@ app.set("layout", "./layouts/layout") //when the express ejs layout goes looking
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(static) //instead of router.use, it is now app.use, meaning that the application itself will use this resource
+
+//Index route
+/**
+* The express application will watch the "get" object, within the HTTP Request, 
+* namely the base route of the application 
+*/
+app.get("/", function(req, res){ //JavaScript function that takes the request and response objects as parameters.
+  res.render("index", {title: "Home"}) //"res" is the response object, while "render()" is an Express function that will retrieve the specified view - "index" - to be sent back to the browser.
+})
 
 /* ***********************
  * Local Server Information
