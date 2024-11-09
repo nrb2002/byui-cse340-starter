@@ -1,6 +1,169 @@
+:root {
+
+  /**
+   * colors
+   */
+  --primary-color:#6A2055;
+  --secondary-color: #F4E2DE;
+  /* --accent-1: #f0eefc;
+  --accent-2: #444444; */
+  
+  --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
+
+  /**
+   * typography
+   */
+   --ff-poppins: 'Poppins', sans-serif;
+   --ff-open-sans: 'Open Sans', sans-serif;
+
+  
+
+  /**
+   * transition
+   */
+
+  --transition: 0.5s ease;
+
+}
+
 /******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+*{
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+
+body {
+  font-family: var(--ff-poppins);
+  font-weight: normal;
+}
+
+h1{
+  margin-top: 0;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+/* Header Style */
+#top-header{
+  background-color: var(--primary-color);
+  padding: 2% 2% 0 2%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#top-header a{
+  color: var(--secondary-color);
+  font-size: .9rem;
+  
+}
+#tools{
+  border: 1px solid #F4E2DE;
+  height: fit-content;
+  padding: 1% 2%;
+  border-radius: 10px;
+}
+/*End Header Style */
+
+/* Navigation's Style */
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  min-height: 4rem;
+  padding: 0 1.2rem;
+  position: fixed;
+  width: 100%;
+  margin-top: 0;
+}
+
+.nav-menu{
+  display: none; 
+  gap: 0;
+  text-align: center;
+  margin: 0 auto;
+  transition: .4s;
+}
+
+.nav-menu.active{
+  left: 0;
+
+}
+ 
+.nav-item{
+  list-style: none;
+  margin: 15px 0;
+}
+
+.nav-link{
+  transition: 0.4s ease;
+}
+
+.nav-link:hover{
+  color: var(--primary-color);
+}
+
+.hamburger{
+  display: block;
+  cursor: pointer;
+  position: fixed;
+  right: 4%;
+  
+}
+
+.hamburger.active .bar:nth-child(2){
+  opacity: 0;
+}
+.hamburger.active .bar:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.bar{
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+
+
+/*End Navigation's Style */
+
+@media(min-width: 1024px){
+  .hamburger{
+    display: none;
+  }
+
+  .nav-menu{    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    min-height: 70px;
+    transition: .04s;
+    gap: 40px;
+    flex-direction: row;     
+    left: -100%;  
+    margin: 0 auto; 
+  }
+
 }
