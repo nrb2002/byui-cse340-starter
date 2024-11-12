@@ -7,12 +7,17 @@ const navMenu = document.querySelector(".nav-menu");
 hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     navMenu.classList.toggle("active");
-    navMenu.style.display = "block";
+    
+    if(navMenu.style.display != "block"){
+        navMenu.style.display = "block";
+    }else{
+        navMenu.style.display = "none";
+    }
 })
+
 
 document.querySelectorAll(".nav-link").
     forEach(link => link.addEventListener("click", () => {
         hamburger.classList.remove("active");
         navMenu.classList.remove("active");
-        navMenu.style.display = "none";
     }))

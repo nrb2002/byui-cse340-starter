@@ -18,4 +18,8 @@ node_modules
 # The readme file is not required, but can be helpful. 
 # In this case, it contains a brief overview of how to make use of these 
 # starter files and folders.
-READLE.md
+README.md
+
+# Ignore the zip files containing logo images
+cse-motors-logo-favicon-zip-file.zip
+cse-motors-logo-zip-file.zip
