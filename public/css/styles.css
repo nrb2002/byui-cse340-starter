@@ -5,8 +5,7 @@
    */
   --primary-color:#6A2055;
   --secondary-color: #F4E2DE;
-  /* --accent-1: #f0eefc;
-  --accent-2: #444444; */
+  --accent-1:#f5f1f1;
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
 
@@ -159,8 +158,6 @@ body {
 }
 
 h1{
-  margin-top: 3.5rem;
-  padding-left: 2%;
   color: var(--primary-color);
   font-size: 1.5rem;
 }
@@ -194,6 +191,10 @@ button:hover,
   color: black;  
 }
 
+/* #wrapper{  
+  background-color: var(--secondary-color);
+} */
+
 /* Header Style */
 #top-header{
   background-color: var(--primary-color);
@@ -219,14 +220,14 @@ button:hover,
 
 .navbar{
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   background-color: black;
   min-height: 3rem;
-  padding: 0 1.2rem;
-  position: fixed;
+  padding: 0 2% 2% 0;
   width: 100%;
   margin-top: 0;
+  z-index: 10;
 }
 
 .nav-menu{
@@ -249,18 +250,23 @@ button:hover,
 
 .nav-link{
   transition: 0.4s ease;
+  font-size: 1.2rem;
 }
 
 .nav-link:hover{
   color: var(--primary-color);
 }
 
+.hambmenu{
+  position: relative;
+
+}
+
 .hamburger{
   display: block;
   cursor: pointer;
-  position: fixed;
-  right: 4%;
-  
+  right: 4%; 
+  position: relative;
 }
 
 .hamburger.active .bar:nth-child(2){
@@ -274,6 +280,7 @@ button:hover,
 }
 
 .bar{
+  position: relative;
   display: block;
   width: 25px;
   height: 3px;
@@ -287,12 +294,13 @@ button:hover,
 main{
   max-width: 1200px;
   margin: -.5rem auto;
-  padding: 1%;
+  padding: 4%;
+  background-color: white;
 }
 
 /* Hero */
 .hero-car{
-  height: 25vh;
+  height: 18vh;
 }
 
 .hero-car img{
@@ -301,61 +309,126 @@ main{
 }
 .hero-car-details{
   position: relative;
-  z-index: 100;
+  z-index: 1;
   margin-top: -52%;
   font-size: .95rem;
+  line-height: 1.2rem;
   opacity: .7;
   background-color: white;
-  padding: 4%;
+  padding: 2%;
   width: fit-content;
   color: var(--primary-color);
   border-radius: 4px;
-  line-height: 1.2rem;
+  border: solid 1px darkgrey;
 }
 
+.car-features{
+  margin-top: 15%;
+  line-height: 1.6rem;
+}
 
-/* End Hero */
+.car-features .card{
+  margin-bottom: 8%;
+}
 
+.car-features .card ul{
+  margin-left: 1.2rem;
+}
 
+.car-features .card ul li{
+  list-style-type: disc;
+}
 
-/*End Navigation's Style */
+.car-features img{
+  width: 30%;
+}
+
+.upgrades{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+}
+
+.upgrades div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 4%;
+  border: solid 1px lightgray;
+  border-radius: 4px;
+  box-shadow: 2px 2px var(--secondary-color);
+}
+
+.upgrades img{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.upgrades a{
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+/* Footer */
+footer{
+  margin-top: 0;
+  background-color: black;
+  color: var(--secondary-color);
+  padding: 4%;
+}
 
 
 @media(min-width: 426px) and (max-width: 1023px){
   h1{
-    margin-top: 4rem;
     font-size: 2rem;
   }
-
   .btn{
     font-size: 1.1rem;    
   }
-  
+  .navbar{
+    padding: 1% 2% 2% 0;
+  }
+
   .hero-car-details{
     font-size: 1.1rem;
     line-height: 1.5rem;
+  }
+  .car-features {
+    margin-top: 35%;
+    font-size: 1.1rem;
+  }
+  .upgrades div{
+    box-shadow: 4px 4px var(--secondary-color);
   }
 }
 
 @media(min-width: 1024px){
   h1{
-    margin-top: 5rem;
     font-size: 2.5rem;
+    margin-bottom: 2%;
+  }
+
+  main{
+    margin: 0 auto;
+    padding: 2%;
   }
 
   .hamburger{
     display: none;
+  }
+  .navbar{
+    padding: 1%;
   }
 
   .nav-menu{    
     display: flex;
     align-items: center;
     text-align: center;
-    min-height: 70px;
     transition: .04s;
     gap: 40px;
-    flex-direction: row;     
-    left: -100%;  
+    flex-direction: row;   
     margin: 0 auto; 
   }
 
@@ -367,6 +440,15 @@ main{
   .hero-car-details{
     font-size: 1.3rem;
     line-height: 2rem;
+  }
+  
+  .car-features {
+    margin-top: 45%;
+    font-size: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2%;
+    line-height: 2.5rem;
   }
 
 }
