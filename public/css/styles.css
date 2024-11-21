@@ -155,6 +155,7 @@ body {
   font-family: var(--ff-poppins);
   font-weight: normal;
   background-color: var(--secondary-color);
+  min-width: 320px;
 }
 
 h1{
