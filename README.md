@@ -45,3 +45,16 @@ When you installed Git and cloned the remote repository in week 1, you should ha
 1. Go to http://localhost:5500 in a browser tab. Nothing should be visible as the server has not been setup to repond to that route.
 2. Add "/filename.html" to the end of the URL (replacing filename with the name of the file you moved to the public folder).
 3. You should see that page in the browser.
+
+# The flow of the M-V-C for our application runs something like this, so far:
+
+A client types or clicks a link containing the index route of our application.
+
+That triggers a request to our server.js page.
+The route is found in the page, which calls the function in the baseController file.
+The controller calls the getNav function and awaits the result to be returned.
+When the finished string is returned, it is stored in the nav variable.
+
+The controller, then tells Express and EJS to send the index.ejs file back to the client, and send the nav string and title name-value pair along with it. These items will be used in the head.ejs and navigation.ejs partials.
+
+The server builds the finished home page and sends it to the browser.

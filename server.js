@@ -11,6 +11,8 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static") //a route file named "static" is imported and stored into a "static" variable
 
+const baseController = require("./controllers/baseController") //bring the base controller into scope
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -29,7 +31,8 @@ app.use(static) //instead of router.use, it is now app.use, meaning that the app
 * namely the base route of the application 
 */
 app.get("/", function(req, res){ //function takes the request and response objects as parameters.
-  res.render("index", {title: "Home"}) //"res" is the response object, while "render()" is an Express function that will retrieve the specified view - "index" - to be sent back to the browser.
+  res.render("/", baseController.buildHome) //"res" is the response object, while "render()" is an Express function that will retrieve the specified view - "index" - to be sent back to the browser.
+  //his will execute the function in the controller, build the navigation bar and pass it and the title name-value pair to the index.ejs view, which will then be sent to the client.
 })
 
 /* ***********************
