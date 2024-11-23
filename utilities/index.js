@@ -4,16 +4,18 @@ meaning that we will reuse them over and over, but they don't directly
 belong to the M-V-C structure.
 */
 
-const invModel = require("../models/inventory-model") //import the model file
-const Util = {} //create an empty util object
+const invModel = require("../models/inventory-model") //Import inventory-model file, so it can be used to get data from the database
+const Util = {} //create an empty Util object
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
+//Create an asynchronous function
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  let list = "<ul>"
-  list += '<li><a href="/" title="Home page">Home</a></li>'
+  console.log(data)
+  let list = '<ul class="nav-menu">'
+  list += '<li class="nav-item"><a class="nav-link href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
     list += "<li>"
     list +=
