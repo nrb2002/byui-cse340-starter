@@ -14,7 +14,7 @@
     Select "Connect to Server"
     Provide the password from the database connection information panel in the Render dashboard.
     Expand the "Databases" item.
-    Expand the cse340 database item.
+    Expand the cse340db_2 database item.
     Expand the "Schemas" item.
     Expand the "public" schema item.
     Right-click on the "Types" item, select "Create > Type...".
@@ -34,11 +34,18 @@
     You'll see the SQL code that pgAdmin wrote behind the scene that will execute when you click the "Save" button.
     This code will be the start of a database rebuild file that you can use to rebuild your entire database from scratch. In future activities you will add additional SQL code to this database rebuild file to create tables and add data.
 */
+/*First block execution*/
 CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340;
+    OWNER TO cse340db_4;
+/*End First block execution*/
+/*=========================================================================*/
+
+
+/*Second block execution*/
+
 /*
     Click "Save" in the Create - Type dialog box.
     If successful, the "account_type" type will now appear beneath the "Types" item in the database.
@@ -84,7 +91,11 @@ CREATE TABLE IF NOT EXISTS public.account (
 	account_type account_type NOT NULL DEFAULT 'Client'::account_type,
 	CONSTRAINT account_pkey PRIMARY KEY (account_id)
 )
+/*End Second block execution*/
 
+/*=========================================================================*//*=========================================================================*/
+
+/* Third block execution*/
 -- Insert data into `classification` table
 INSERT INTO public.classification (classification_name) 
   VALUES ('Custom'), ('Sport'), ('SUV'), ('Truck'), ('Sedan');
@@ -270,4 +281,5 @@ VALUES   (
     'White',
     5
   );
+/* End Third block execution*/
 		
