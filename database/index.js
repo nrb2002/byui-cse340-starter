@@ -6,17 +6,15 @@ require("dotenv").config() //Import dotenv package that stores sensitive info ab
  * But will cause problems in production environment
  * If - else will make determination which to use
  * *************** */
-let pool //Create a local pool variable
+let pool //Instanciate a local pool object
 
 //Check to see if the code exists in a development environment
 if (process.env.NODE_ENV == "development") {
     //create a new pool instance from the imported Pool class
     pool = new Pool({
-        //Set the connection string as stored in the .env file
-        connectionString: process.env.DATABASE_URL,
+        connectionString: process.env.DATABASE_URL, //Set the connection string as stored in the .env file
         ssl: {
-            //prevent server from rejecting remote connection
-        rejectUnauthorized: false,
+            rejectUnauthorized: false, //prevent server from rejecting remote connection
         },
     })
 

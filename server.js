@@ -13,6 +13,7 @@ const static = require("./routes/static") //a route file named "static" is impor
 
 const baseController = require("./controllers/baseController") //bring the base controller into scope
 
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -35,6 +36,10 @@ app.use(static) //instead of router.use, it is now app.use, meaning that the app
 //pass it and the title name-value pair to the index.ejs view, 
 //which will then be sent to the client
 app.get("/", baseController.buildHome) 
+
+//Inventory routes
+//This means that any route that start with "/inv" will be redirected to the inventoryRoute.js file
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information

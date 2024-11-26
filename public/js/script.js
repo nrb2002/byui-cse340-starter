@@ -21,3 +21,12 @@ document.querySelectorAll(".nav-link").
         hamburger.classList.remove("active");
         navMenu.classList.remove("active");
     }))
+
+
+//Refresh page when size moves above 1024.
+window.onresize = reloadPage;
+
+function reloadPage(){
+    var width = window.innerWidth;
+    if(width >= 1024){ location.reload() }
+}
