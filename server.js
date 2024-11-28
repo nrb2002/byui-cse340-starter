@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static") //a route file named "static" is imported and stored into a "static" variable
 
 const baseController = require("./controllers/baseController") //bring the base controller into scope
+const inventoryRoute = require("./routes/inventoryRoute") //Import the inventoryRoute from the routes folder
 
 
 /* ***********************
@@ -38,7 +39,7 @@ app.use(static) //instead of router.use, it is now app.use, meaning that the app
 app.get("/", baseController.buildHome) 
 
 //Inventory routes
-//This means that any route that start with "/inv" will be redirected to the inventoryRoute.js file
+//Any route that start with "/inv" will be redirected to the inventoryRoute.js file
 app.use("/inv", inventoryRoute)
 
 /* ***********************

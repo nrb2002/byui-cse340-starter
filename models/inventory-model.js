@@ -11,8 +11,6 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
-module.exports = {getClassifications}
-
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -25,7 +23,7 @@ async function getInventoryByClassificationId(classification_id) {
       WHERE i.classification_id = $1`,
       [classification_id]
     )
-    return data.rows
+    return data.rows //send the data as an array of all the rows, back to where the function was called (in the controller)
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
   }

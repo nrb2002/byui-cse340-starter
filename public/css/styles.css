@@ -9,6 +9,7 @@
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
 
+  --shadow:  4px 4px var(--secondary-color);
   /**
    * typography
    */
@@ -22,7 +23,12 @@
    */
 
   --transition: 0.5s ease;
+
+  /* Border radius */
+  --radius:8px;
 }
+
+
 
 
 .lavishly-yours-regular {
@@ -355,10 +361,7 @@ main{
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding: 4%;
-  border: solid 1px lightgray;
-  border-radius: 4px;
-  box-shadow: 2px 2px var(--secondary-color);
+  padding: 4%;  
 }
 
 .upgrades img{
@@ -372,9 +375,47 @@ main{
   font-size: 1rem;
 }
 
+/* Inventory Display */
+ul#inv-display {
+  width: 100%;
+  display: grid;
+  gap: 1%;
+  margin-bottom: 0;
+}
+
+.upgrades div,
+ul#inv-display li{
+  border: solid 1px lightgray;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .2s; /* Animation */
+}
+
+.upgrades div:hover,
+ul#inv-display li:hover{
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+ul#inv-display li img {
+  width: 100%;
+  height: 180px;
+}
+.namePrice {
+  padding: 2%;
+}
+.namePrice a{
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+.namePrice span{
+  font-weight: bold;
+}
+
+/* Inventory Display */
+
 /* Footer */
 footer{
-  margin-top: 0;
+  margin-top: 4%;
   background-color: black;
   color: var(--secondary-color);
   padding: 4%;
@@ -401,8 +442,22 @@ footer{
     font-size: 1.1rem;
   }
   .upgrades div{
-    box-shadow: 4px 4px var(--secondary-color);
+    box-shadow: var(--shadow);
   }
+
+  /* Inventory Display */
+  ul#inv-display {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  ul#inv-display li img {
+    height: 200px;
+  }
+  .namePrice a{
+    font-size: 1.2rem;
+  }
+
+  /* Inventory Display */
 }
 
 @media(min-width: 1024px){
@@ -451,5 +506,18 @@ footer{
     gap: 2%;
     line-height: 2.5rem;
   }
+
+  /* Inventory Display */
+  ul#inv-display {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  ul#inv-display li img {
+    height: 230px;
+  }
+  .namePrice a{
+    font-size: 1.3rem;
+  }
+
+  /* Inventory Display */
 
 }

@@ -1,5 +1,5 @@
 const invModel = require("../models/inventory-model") //Import Inventory Model
-const utilities = require("../utilities/") //Import utilities index file
+const utilities = require("../utilities/") //Import utilities
 
 const invCont = {} //Create an empty object of invCont
 
@@ -8,7 +8,7 @@ const invCont = {} //Create an empty object of invCont
  * ************************** */
 //Create an asynchronous function that pulls the vehicles by classification
 invCont.buildByClassificationId = async function (req, res, next) {
-  const classification_id = req.params.classificationId
+  const classification_id = req.params.classificationId //get the classification_id that has been sent, as a named parameter, through the URL
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data) //calls a utility function to build a grid, containing all vehicles within that classification
   let nav = await utilities.getNav() //calls the function to build the navigation bar for use in the view and stores it in the nav variable

@@ -58,3 +58,21 @@ When the finished string is returned, it is stored in the nav variable.
 The controller, then tells Express and EJS to send the index.ejs file back to the client, and send the nav string and title name-value pair along with it. These items will be used in the head.ejs and navigation.ejs partials.
 
 The server builds the finished home page and sends it to the browser.
+
+# How to create the relational database in pgAdmin and establish the connection to the render.com remote server.
+
+# On render.com side
+
+1. Open your render.com dashboard.
+2. Click on the existing PostgreSQL project.
+3. Click on the "+" sign and select "Create new service".
+4. Select "New PostgreSQL".
+5. Fill out the form accordingly.
+6. Click on "Create Database".
+
+# On pgAdmin side
+
+7. Right-click on "Database > Create > Database".
+8. In the "General" tab, copy and paste the database name from render.com, and then save.
+9. Turn SSL option to "require".
+10. Execute SQL queries to create and populate tables. 

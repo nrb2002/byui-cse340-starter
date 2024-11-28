@@ -9,6 +9,6 @@ const invController = require("../controllers/invController") //Import the Inven
 /type/:classificationId the route being watched for.
 invController.buildByClassification is the function from the invController that will fulfill the request sent by the route.
 */
-router.get("/type/:classificationID", invController.buildByClassificatonId);
+router.get("/type/:classificationId", invController.buildByClassificationId);
 
 module.exports = router;

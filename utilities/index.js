@@ -9,16 +9,16 @@ const Util = {} //create an empty Util object
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-//Create an asynchronous function that pull the nav menu names from the database
+//Create an asynchronous function that pulls the nav menu names from the database
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
   console.log(data)
   let list = '<ul class="nav-menu">'
-  list += '<li class="nav-item"><a class="nav-link href="/" title="Home page">Home</a></li>'
+  list += '<li class="nav-item"><a class="nav-link" href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
     list += '<li class="nav-item">'
     list +=
-      '<a class="nav-link href="/inv/type/' +
+      '<a class="nav-link" href="/inv/type/' +
       row.classification_id +
       '" title="See our inventory of ' +
       row.classification_name +
@@ -36,15 +36,17 @@ module.exports = Util
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
+//Build an asynchronous function that creates a grid for data returned as an array
+//from the model query
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<ul id="inv-display" >'
     data.forEach(vehicle => { 
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
+      + ' details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
