@@ -522,7 +522,17 @@ footer{
   .namePrice a{
     font-size: 1.3rem;
   }
-
   /* Inventory Display */
+
+  /* Error content display */
+  .errorContent{
+    text-align: center;
+  }
+  
+  .errorContent img{
+    width: 60%;
+  }
+  /* Error content display */
+
 
 }
