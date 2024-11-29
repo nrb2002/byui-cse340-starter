@@ -47,7 +47,7 @@ app.use("/inv", inventoryRoute) //Any route that start with "/inv" will be redir
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Please fix the url you entered or check your connection.'})
+  next({status: 404, message: 'Please fix the url or check your connection.'})
 })
 
 
@@ -58,20 +58,38 @@ app.use(async (req, res, next) => {
 // app.use is an Express function, which accepts the default Express arrow function to be used with errors.
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav() //build the navigation bar for the error view
-  let errorContent = await utilities.buildErrorContent() //Import the error content image from utilities
   console.error(`Error at: "${req.originalUrl}": ${err.message}`) //a console statement to show the route and error that occurred; helpful to show what the client was doing when the error occurred.
-
+  let errorContent = await utilities.buildErrorContent() //Import the error content image from utilities
+  
   /*
   checks to see if the status code is 404. 
   If so, the default error message - "File Not Found" - is assigned to the "message" property. 
   If it is anything else, a generic message is used.
   */
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash during the query transmission to the server. Please try again later.'}
+  if(err.status == 404){
+    //call the "error.ejs" view (you will build that next) in an "errors" folder.
+    res.render("errors/error", {
+      title: err.status + ' | Page not found!' || 'Server Error', //sets the value of the "title" for the view
+      message: err.message, //sets the message to be displayed in the error view
+      nav, //sets the navigation bar for use in the error view
+      errorContent //sets the error content image
+    })
+  } else {
+    err.status = 500
+    message = 'Query aborted. Please contact your system administrator.'
+    //call the "error.ejs" view (you will build that next) in an "errors" folder.
+    res.render("errors/error", {
+      title: err.status + ' | Internal server error!' || 'Server Error', //sets the value of the "title" for the view
+      //message: message, //sets the message to be displayed in the error view
+      nav, //sets the navigation bar for use in the error view
+      errorContent //sets the error content image
+    })
+  }
   
   //call the "error.ejs" view (you will build that next) in an "errors" folder.
   res.render("errors/error", {
     title: err.status + ' | Page not found!' || 'Server Error', //sets the value of the "title" for the view
-    message: err.message, //sets the message to be displayed in the error view
+    //message: err.message, //sets the message to be displayed in the error view
     nav, //sets the navigation bar for use in the error view
     errorContent //sets the error content image
   })
