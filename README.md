@@ -150,10 +150,11 @@ If, for whatever reason, you exceed the limits the service will stop, and you wi
 4. Select "New PostgreSQL".
 5. Fill out the form accordingly.
 6. Click on "Create Database".
+7. Go to the existing Web service and update the Database internal URL in the Environment section. This link can be found in database service - see "Connect" button and pick internal. 
 
 ## On pgAdmin side
 
-7. Right-click on "Database > Create > Database".
-8. In the "General" tab, copy and paste the database name from render.com, and then save.
-9. Turn SSL option to "require".
-10. Execute SQL queries to create and populate relevant tables. 
+8. Right-click on "Database > Create > Database".
+9. In the "General" tab, copy and paste the database name from render.com, and then save.
+10. Turn SSL option to "require".
+11. Execute SQL queries to create and populate relevant tables. 

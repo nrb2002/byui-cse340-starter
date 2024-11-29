@@ -31,8 +31,6 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
-module.exports = Util
-
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
@@ -67,3 +65,32 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* **************************************
+* Build the classification view HTML
+* ************************************ */
+//Build an asynchronous function that creates a grid for data returned as an array
+//from the model query
+Util.buildErrorContent = async function (){
+  let errorContent = '<div class="errorContent">'
+  errorContent += '<img src="/images/site/cse-404-1.jpg">'
+  errorContent += '</div>'
+
+  return errorContent
+}
+
+
+/* ************************************************************************************************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ ************************************************************************************************************************ */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+//Util.handleErrors = - declares the property which is appended to the "Util" object.
+// fn => (req, res, next) => an arrow function named "fn" which accepts request, response, and next as parameters along with another arrow function.
+// Promise.resolve(fn(req, res, next)) a "wrapper" that accepts a function as a parameter of the "Promise.resolve" function. In other words, the wrapped function is called and attempts to fulfill its normal process, but now does so within a JavaScript promise. If it succeeds, then the promise is resolved and everything continues normally.
+// .catch(next) - if there is an error, then the Promise "fails", the error that caused the failure is "caught" and forwarded to the next process in the application chain.
+// Because it is an "error" that is being passed via the "next" function, the Express Error Handler will catch the error and then build and deliver the error view to the client.
+
+
+module.exports = Util

@@ -28,9 +28,6 @@
   --radius:8px;
 }
 
-
-
-
 .lavishly-yours-regular {
   font-family: "Lavishly Yours", cursive;
   font-weight: 400;
@@ -413,6 +410,13 @@ ul#inv-display li img {
 }
 
 /* Inventory Display */
+
+/* Error content display */
+.errorContent img{
+  width: 100%;
+  margin: 0 auto;
+}
+/* Error content display */
 
 /* Footer */
 footer{
