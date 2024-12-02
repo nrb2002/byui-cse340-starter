@@ -42,20 +42,20 @@ Util.buildClassificationGrid = async function(data){
     grid = '<ul id="inv-display" >'
     data.forEach(vehicle => { 
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + ' details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+      grid +=  '<a href="../../inv/detail/'+ data.rows[0].inv_id 
+      + '" title="View ' + data.rows[0].inv_make + ' '+ data.rows[0].inv_model 
+      + ' details"><img src="' + data.rows[0].inv_thumbnail 
+      +'" alt="Image of '+ data.rows[0].inv_make + ' ' + data.rows[0].inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+      grid += '<a href="../../inv/detail/' + data.rows[0].inv_id +'" title="View ' 
+      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + ' details">' 
+      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + '</a>'
       grid += '</h2>'
       grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      + new Intl.NumberFormat('en-US').format(data.rows[0].inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
@@ -64,6 +64,42 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+/* **************************************
+* Build the item detail view HTML
+* ************************************ */
+//Build an asynchronous function that creates a grid for data returned as an array
+//from the model query
+Util.buildItemDetailGrid = async function(data){
+  let item
+  if(data.length > 0){
+    item = '<ul id="inv-display" >'
+    
+      item += '<li>'
+      item +=  '<a href="../../inv/detail/'+ data.rows[0].inv_id 
+      + '" title="View ' + data.rows[0].inv_make + ' '+ data.rows[0].inv_model 
+      + ' details"><img src="' + data.rows[0].inv_thumbnail 
+      +'" alt="Image of '+ data.rows[0].inv_make + ' ' + data.rows[0].inv_model 
+      +' on CSE Motors" /></a>'
+      item += '<div class="namePrice">'
+      item += '<hr />'
+      item += '<h2>'
+      item += '<a href="../../inv/detail/' + data.rows[0].inv_id +'" title="View ' 
+      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + ' details">' 
+      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + '</a>'
+      item += '</h2>'
+      item += '<span>$' 
+      + new Intl.NumberFormat('en-US').format(data.rows[0].inv_price) + '</span>'
+      item += '</div>'
+      item += '</li>'
+    item = data.rows[0].inv_make
+    
+    item += '</ul>'
+  } else { 
+    item += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return item
 }
 
 /* **************************************
