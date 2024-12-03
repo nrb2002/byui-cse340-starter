@@ -14,9 +14,9 @@ Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
   console.log(data)
   let list = '<ul class="nav-menu">'
-  list += '<li class="nav-item"><a class="nav-link" href="/" title="Home page">Home</a></li>'
+  list += '<li class="nav-data"><a class="nav-link" href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
-    list += '<li class="nav-item">'
+    list += '<li class="nav-data">'
     list +=
       '<a class="nav-link" href="/inv/type/' +
       row.classification_id +
@@ -39,23 +39,23 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display" >'
+    grid = '<ul class="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ data.rows[0].inv_id 
-      + '" title="View ' + data.rows[0].inv_make + ' '+ data.rows[0].inv_model 
-      + ' details"><img src="' + data.rows[0].inv_thumbnail 
-      +'" alt="Image of '+ data.rows[0].inv_make + ' ' + data.rows[0].inv_model 
+      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+      + ' details"><img src="' + vehicle.inv_thumbnail 
+      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + data.rows[0].inv_id +'" title="View ' 
-      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + ' details">' 
-      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + '</a>'
+      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
       grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(data.rows[0].inv_price) + '</span>'
+      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
@@ -67,43 +67,79 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
-* Build the item detail view HTML
+* Build the classification view HTML
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
-Util.buildItemDetailGrid = async function(data){
-  let item
-  if(data.length > 0){
-    item = '<ul id="inv-display" >'
+Util.buildInventoryGrid = async function(item){
+  let grid
+
+
+  // if(data.length>1){
+    grid = '<div class="item">'
+
+    grid += '<div class="inv-display">'
+    grid += '<img src="' + item.inv_image 
+    +'" alt="'+ item.inv_make + ' ' + item.inv_model + ' ' + item.inv_year 
+    +' on CSE Motors'
+    + '/>'  
+    grid += '</div>'
+
+    grid += '<div class="item-card">'
+    grid += '<div class="item-price">'
+    +'<h2>Price: $ '+ item.inv_price + '</h2>'
+    grid += '</div>'
+    grid += '<div class="item-details">'
+    grid += '<ul>'
+    grid += '<li>'
+    + 'Make: ' + item.inv_make
+    grid += '</li>'
+    grid += '<li>'
+    + 'Model: ' + item.inv_model
+    grid += '</li>'
+    grid += '<li>'
+    + 'Color: ' + item.inv_color
+    grid += '</li>'
+    grid += '<li>'
+    + 'Year: ' + item.inv_year
+    grid += '</li>'
+    grid += '<li>'
+    + 'Mileage: ' + item.inv_miles
+    grid += '</li>'
+    grid += '</ul>'
+    grid += '</div>'
+    grid += '<div>'
+    + 'Description: ' + item.inv_description    
+    grid += '</div>'
+    grid += '</div>'
+
+
+
+
+
+
+
     
-      item += '<li>'
-      item +=  '<a href="../../inv/detail/'+ data.rows[0].inv_id 
-      + '" title="View ' + data.rows[0].inv_make + ' '+ data.rows[0].inv_model 
-      + ' details"><img src="' + data.rows[0].inv_thumbnail 
-      +'" alt="Image of '+ data.rows[0].inv_make + ' ' + data.rows[0].inv_model 
-      +' on CSE Motors" /></a>'
-      item += '<div class="namePrice">'
-      item += '<hr />'
-      item += '<h2>'
-      item += '<a href="../../inv/detail/' + data.rows[0].inv_id +'" title="View ' 
-      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + ' details">' 
-      + data.rows[0].inv_make + ' ' + data.rows[0].inv_model + '</a>'
-      item += '</h2>'
-      item += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(data.rows[0].inv_price) + '</span>'
-      item += '</div>'
-      item += '</li>'
-    item = data.rows[0].inv_make
-    
-    item += '</ul>'
-  } else { 
-    item += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-  }
-  return item
+    // data.forEach(vehicle => { 
+      grid += '<li>'
+      grid +=  item.inv_make 
+      grid += '</li>'
+    // })
+    grid += '</>'
+  // } else { 
+  //   grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  // }
+
+
+
+
+
+
+  return grid 
 }
 
 /* **************************************
-* Build the classification view HTML
+* Build the error view HTML
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query

@@ -13,6 +13,6 @@ invController.buildByClassification is the function from the invController that 
 router.get("/type/:classificationId", invController.buildByClassificationId);
 
 //Route to build a specific inventory item detail view
-router.get("/type/:inventoryId", invController.buildItemDetailView);
+router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
 module.exports = router;
