@@ -74,58 +74,68 @@ Util.buildClassificationGrid = async function(data){
 Util.buildInventoryGrid = async function(item){
   let grid
 
-
   // if(data.length>1){
-    grid = '<div class="item">'
+  //Item Display
+    grid = '<div class="item-display">'
 
-    grid += '<div class="inv-display">'
-    grid += '<img src="' + item.inv_image 
-    +'" alt="'+ item.inv_make + ' ' + item.inv_model + ' ' + item.inv_year 
-    +' on CSE Motors'
-    + '/>'  
-    grid += '</div>'
-
+    // grid += '<div>'
+    grid += '<img src="' + item.inv_image+'" alt="'+ item.inv_make + ' ' 
+    + item.inv_model + ' ' 
+    + item.inv_year 
+    +' on CSE Motors/>'  
+    
+    
+    //Item Card
     grid += '<div class="item-card">'
-    grid += '<div class="item-price">'
-    +'<h2>Price: $ '+ item.inv_price + '</h2>'
+
+  
+    //Item Details Table
+    grid += '<div class="item-table">'
+    grid+='<div class="item-price">'
+    grid+= '<h2>Price: US $ '+parseFloat(item.inv_price).toFixed(2)+'</h2>'
+    grid+='</div>'
+    grid += '<hr>'
+
+    grid += '<table>'    
+    grid += '<tr>'
+    grid += '<th>Make</th>'
+    grid += '<td>'+item.inv_make+'</td>'
+    grid += '</tr>'
+    grid += '<tr>'
+    grid += '<th>Model </th>'
+    grid += '<td>'+item.inv_model+'</td>'
+    grid += '</tr>'
+    grid += '<tr>'
+    grid += '<th>Color</th>'
+    grid += '<td>'+item.inv_color+'</td>'
+    grid += '</tr>'
+    grid += '<tr>'
+    grid += '<th>Year: </th>'
+    grid += '<td>'+item.inv_year+'</td>'
+    grid += '</tr>'
+    grid += '<tr>'
+    grid += '<th>Mileage </th>'
+    grid += '<td>'+parseFloat(item.inv_miles).toFixed(1)+' miles</td>'
+    grid += '</tr>'
+    grid += '<tr>'
+    grid += '<th>Description </th>'
+    grid += '<td>'+item.inv_description+'</td>'
+    grid += '</tr>'
+    grid += '</table>'
+    grid += '<hr>'
     grid += '</div>'
-    grid += '<div class="item-details">'
-    grid += '<ul>'
-    grid += '<li>'
-    + 'Make: ' + item.inv_make
-    grid += '</li>'
-    grid += '<li>'
-    + 'Model: ' + item.inv_model
-    grid += '</li>'
-    grid += '<li>'
-    + 'Color: ' + item.inv_color
-    grid += '</li>'
-    grid += '<li>'
-    + 'Year: ' + item.inv_year
-    grid += '</li>'
-    grid += '<li>'
-    + 'Mileage: ' + item.inv_miles
-    grid += '</li>'
-    grid += '</ul>'
+    //End Item Details Table
+
     grid += '</div>'
-    grid += '<div>'
-    + 'Description: ' + item.inv_description    
+    //End Item Card
+
+    // })
     grid += '</div>'
-    grid += '</div>'
-
-
-
-
-
-
+    //End Item Display
+    
 
     
-    // data.forEach(vehicle => { 
-      grid += '<li>'
-      grid +=  item.inv_make 
-      grid += '</li>'
-    // })
-    grid += '</>'
+
   // } else { 
   //   grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   // }
