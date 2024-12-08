@@ -157,13 +157,14 @@ Util.buildInventoryGrid = async function(item){
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
-Util.build404Content = async function (){
+Util.buildErrorContent = async function (){
   let errorContent = '<div class="errorContent">'
   errorContent += '<img src="/images/site/cse-404-1.jpg">'
   errorContent += '</div>'
 
   return errorContent
 }
+
 
 
 /* ************************************************************************************************************************
