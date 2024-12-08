@@ -6,6 +6,20 @@ belong to the M-V-C structure.
 const invModel = require("../models/inventory-model") //Import inventory-model file, so it can be used to get data from the database
 const Util = {} //create an empty Util object
 
+// format number to US dollar
+const toUSD = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+//format mileage
+const toMiles = new Intl.NumberFormat("en-US", { // Make users locale dynamic
+  style: 'unit',
+  unit: 'mile',
+  unitDisplay: 'short',
+  maximumFractionDigits: 0
+});
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -54,8 +68,8 @@ Util.buildClassificationGrid = async function(data){
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
-      grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      grid += '<span>' 
+      + toUSD.format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
@@ -73,26 +87,24 @@ Util.buildClassificationGrid = async function(data){
 //from the model query
 Util.buildInventoryGrid = async function(item){
   let grid
-
+  
   // if(data.length>1){
   //Item Display
     grid = '<div class="item-display">'
 
     // grid += '<div>'
-    grid += '<img src="' + item.inv_image+'" alt="'+ item.inv_make + ' ' 
+    grid += '<img src="' + item.inv_image + '" alt="'+ item.inv_make + ' ' 
     + item.inv_model + ' ' 
     + item.inv_year 
     +' on CSE Motors/>'  
     
-    
     //Item Card
     grid += '<div class="item-card">'
-
   
     //Item Details Table
     grid += '<div class="item-table">'
     grid+='<div class="item-price">'
-    grid+= '<h2>Price: US $ '+parseFloat(item.inv_price).toFixed(2)+'</h2>'
+    grid+= '<h2>Price: ' + toUSD.format(item.inv_price) + '</h2>'
     grid+='</div>'
     grid += '<hr>'
 
@@ -102,7 +114,7 @@ Util.buildInventoryGrid = async function(item){
     grid += '<td>'+item.inv_make+'</td>'
     grid += '</tr>'
     grid += '<tr>'
-    grid += '<th>Model </th>'
+    grid += '<th>Model </th>' 
     grid += '<td>'+item.inv_model+'</td>'
     grid += '</tr>'
     grid += '<tr>'
@@ -115,7 +127,7 @@ Util.buildInventoryGrid = async function(item){
     grid += '</tr>'
     grid += '<tr>'
     grid += '<th>Mileage </th>'
-    grid += '<td>'+parseFloat(item.inv_miles).toFixed(1)+' miles</td>'
+    grid += '<td>'+ toMiles.format(item.inv_miles) + '</td>'
     grid += '</tr>'
     grid += '<tr>'
     grid += '<th>Description </th>'
@@ -133,17 +145,9 @@ Util.buildInventoryGrid = async function(item){
     grid += '</div>'
     //End Item Display
     
-
-    
-
   // } else { 
   //   grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   // }
-
-
-
-
-
 
   return grid 
 }
@@ -153,7 +157,7 @@ Util.buildInventoryGrid = async function(item){
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
-Util.buildErrorContent = async function (){
+Util.build404Content = async function (){
   let errorContent = '<div class="errorContent">'
   errorContent += '<img src="/images/site/cse-404-1.jpg">'
   errorContent += '</div>'

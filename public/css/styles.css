@@ -190,7 +190,7 @@ button,
 
 button:hover,
 .btn:hover{
-  border-style: black solid 2px;
+  border: solid 2px black;
   background-color: var(--secondary-color);
   color: black;  
 }
