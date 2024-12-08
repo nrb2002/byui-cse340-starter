@@ -158,3 +158,31 @@ If, for whatever reason, you exceed the limits the service will stop, and you wi
 9. In the "General" tab, copy and paste the database name from render.com, and then save.
 10. Turn SSL option to "require".
 11. Execute SQL queries to create and populate relevant tables. 
+
+# Session Secret
+In the session middleware function, line 9, a secret value was indicated. We need to create that value.
+
+Open the .env file from the root of the project.
+Beneath the existing name - value pairs add the following:
+SESSION_SECRET=
+With the name in place, let's create the actual value for the SESSION_SECRET. It is critical that the secret value be random, so that it cannot be guessed. We will use a built-in Express function to do this for us:
+Open a new VSC terminal.
+Type "node", press "Enter".
+Type "require('crypto').randomBytes(64).toString('hex')", press "Enter".
+Copy the generated string, including the single quotes on either end, and paste it as the value for the SESSION_SECRET.
+Type "Control + C" in the terminal window to exit Node. Reduce or close the terminal.
+Ensure that no warnings or errors are indicated in the .env file.
+Save the file.
+Recall that the .env file is ONLY for testing locally. Because it is our intent to deploy this to a live server, the values that were just created need to also be present in our production environment. Let's do that now.
+
+# Render.com Environment Variables
+In a browser, login to render.com using your GitHub sign-in.
+In the dashboard, click on the web server.
+In the dashboard, click on Environment on the left-side of the screen.
+Click the Add Environment Variable button.
+In the first empty Key text box, copy and paste the name from your own .env file: SESSION_SECRET
+Copy the actual value from the .env file for the SESSION_SECRET, and paste it into the "value" textarea. Do NOT include the equal sign or surrounding quotes, just the string between the quotes.
+Visually compare everything from the two locations for identical values.
+Click the "Save Changes" button in the render.com window.
+When the save is complete, ensure that the new item has a small checkmark in the bottom right-corner of the "value" textarea.
+The value will be replaced by bullets to hide the value from anyone who may look over your shoulder. To view the value, hover over or click in the textarea.

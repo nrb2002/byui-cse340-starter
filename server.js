@@ -18,6 +18,27 @@ const invController = require("./controllers/invController") //bring the invento
 
 const utilities = require("./utilities/") //Import utilities
 
+const session = require("express-session") //Import session package
+const pool = require('./database/') //Import database connection
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({ //app.use() applies whatever is being invoked throughout the entire application
+  //creating a new session table in our PostgreSQL database 
+  // using the "connect-pg-simple" package 
+  // and our pool connection for the database connection
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  //Create name - value pair that will be used to protect the session
+  // the value of the session secret should be created in the .env file
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId', 
+}))
 
 /* ***********************
  * View Engine and Templates
