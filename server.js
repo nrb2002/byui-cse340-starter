@@ -14,6 +14,7 @@ const static = require("./routes/static") //a route file named "static" is impor
 const inventoryRoute = require("./routes/inventoryRoute") //Import the inventoryRoute from the routes folder
 
 const baseController = require("./controllers/baseController") //bring the base controller into scope
+const invController = require("./controllers/invController") //bring the inventory controller into scope
 
 const utilities = require("./utilities/") //Import utilities
 
@@ -43,7 +44,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 //Inventory routes
 app.use("/inv", inventoryRoute) //Any route that start with "/inv" will be redirected to the inventoryRoute.js file
-
+app.use("/inv/error500", utilities.handleErrors(invController.buildByClassificationId)) 
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
