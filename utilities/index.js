@@ -81,7 +81,7 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
-* Build the classification view HTML
+* Build the Inventory Detail view HTML
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
@@ -92,7 +92,6 @@ Util.buildInventoryGrid = async function(item){
   //Item Display
     grid = '<div class="item-display">'
 
-    // grid += '<div>'
     grid += '<img src="' + item.inv_image + '" alt="'+ item.inv_make + ' ' 
     + item.inv_model + ' ' 
     + item.inv_year 
@@ -153,7 +152,58 @@ Util.buildInventoryGrid = async function(item){
 }
 
 /* **************************************
-* Build the error view HTML
+* Build the Inventory Detail view HTML
+* ************************************ */
+//Build an asynchronous function that creates a grid for data returned as an array
+//from the model query
+Util.buildLogin = async function(){
+  let login  
+  
+  login = '<div class="item-display">'
+
+  login += '<div class="login-container">'
+  login += '<div class="login-card">'
+  login += '<h2>Login Form</h2>'
+  login += '<form class="login-form">'
+  login += '<label for="username">Username</label>'
+  login += '<input type="text" id="username" placeholder="Enter your username">'
+
+  login += '<label for="password">Password</label>'
+  login += '<input type="password" id="password" placeholder="Enter your password">'
+
+  login += '<button type="submit">Login</button>'
+  login += '</form>'
+  login += '<div class="switch">Don\'t have an account? <a href="#" onclick="switchCard()">Register here</a></div>'
+  login += '</div>'
+
+  login += '<div class="login-card" style="display: none;">'
+  login += '<h2>Register Form</h2>'
+  login += '<form>'
+  login += '<label for="fullname">Full Name</label>'
+  login += '<input type="text" id="fullname" placeholder="Enter your full name">'
+
+  login += '<label for="email">Email</label>'
+  login += '<input type="email" id="email" placeholder="Enter your email">'
+
+  login += '<label for="new-password">New Password</label>'
+  login += '<input type="password" id="new-password" placeholder="Enter your new password">'
+
+  login += '<button type="submit">Register</button>'
+  login += '</form>'
+  login += '<div class="switch">Already have an account? <a href="#" onclick="switchCard()">Login here</a></div>'
+  login += '</div>'
+  login += '</div>'
+
+    
+    
+
+  return login 
+}
+
+
+
+/* **************************************
+* Build the 404 error background
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
