@@ -9,10 +9,11 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts") //we tell the application to require express-ejs-layouts, so it can be used
 const env = require("dotenv").config()
 const app = express()
-
+//Import routes
 const static = require("./routes/static") //a route file named "static" is imported and stored into a "static" variable
 const inventoryRoute = require("./routes/inventoryRoute") //Import the inventoryRoute from the routes folder
-
+const accountRoute = require("./routes/accountRoute") //Import the login route
+//Import controllers
 const baseController = require("./controllers/baseController") //bring the base controller into scope
 const invController = require("./controllers/invController") //bring the inventory controller into scope
 
@@ -22,8 +23,9 @@ const session = require("express-session") //Import session package
 const pool = require('./database/') //Import database connection
 
 /* ***********************
- * Middleware
+ * Middleware - Session
  * ************************/
+//Connect-pg-simple middleware
 app.use(session({ //app.use() applies whatever is being invoked throughout the entire application
   //creating a new session table in our PostgreSQL database 
   // using the "connect-pg-simple" package 
@@ -39,6 +41,13 @@ app.use(session({ //app.use() applies whatever is being invoked throughout the e
   saveUninitialized: true,
   name: 'sessionId', 
 }))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 /* ***********************
  * View Engine and Templates
@@ -66,6 +75,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 //Inventory routes
 app.use("/inv", inventoryRoute) //Any route that start with "/inv" will be redirected to the inventoryRoute.js file
 app.use("/inv/error500", utilities.handleErrors(invController.buildByClassificationId)) 
+
+//Account route
+app.use("/account", accountRoute) //Whenever a user clicks on this link, will be redirected to this route
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
