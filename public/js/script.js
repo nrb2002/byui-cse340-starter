@@ -30,3 +30,16 @@ function reloadPage(){
     var width = window.innerWidth;
     if(width >= 1024){ location.reload() }
 }
+
+//Toggle Password View
+function togglePassword() {
+    let x = document.getElementById("account_password");
+    let y = document.getElementById("account_confirm_password");
+    if (x.type === "password") {
+      x.type = "text";
+      y.type = "text";
+    } else {
+      x.type = "password";
+      y.type = "password";
+    }
+}

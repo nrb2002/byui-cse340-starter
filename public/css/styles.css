@@ -5,7 +5,8 @@
    */
   --primary-color:#6A2055;
   --secondary-color: #F4E2DE;
-  --accent-1:#f5f1f1;
+  --accent-1:#d6caca;
+  --accent-2:#007BFF;
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
 
@@ -388,6 +389,7 @@ ul.notice {
   background-color: var(--secondary-color);
   padding: 2%;
   margin-bottom: .5%;
+  margin-top: -3%;
 }
 
 .item-display,
@@ -400,7 +402,7 @@ ul.inv-display {
 
 .upgrades div,
 ul.inv-display li{
-  border: solid 1px lightgray;
+  border: solid 1px var(--accent-1);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   transition: transform .2s; /* Animation */
@@ -437,7 +439,7 @@ li.nav-data{
 }
 
 .item-price {
-  background-color: lightgrey;
+  background-color: var(--accent-1);
   color: var(--primary-color);
   padding: 4%;
   text-align: end;
@@ -485,7 +487,7 @@ li.nav-data{
   width: 100%;
   background-color: #fff;
   padding: 20px;
-  border: solid 1px lightgray;
+  border: solid 1px var(--accent-1);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   text-align: center;
@@ -505,32 +507,53 @@ li.nav-data{
   display: flex;
   flex-direction: column;
 }
+.login-form .togglePasswd input{  
+  width: fit-content;
+}
+
+.login-form .togglePasswd{  
+  width: 100%;
+  display: flex;
+  gap: 4%;
+  padding: 2%;
+}
+
+.login-form small{
+  font-style: italic;
+  color: red;
+  /* font-size:small; */
+  text-align: left;
+  margin-bottom: 4%;
+}
 
 .login-form label {
   text-align: left;
   margin-bottom: 5px;
 }
 
-.login-form input{
+.login-form input,
+.login-form select{
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 }
 
-.switch {
+.login-form input{
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.form-link {
   margin-top: 15px;
   font-size: 14px;
 }
 
-.switch a {
-  color: #007BFF;
+.form-link a {
+  color: var(--accent-2);
   text-decoration: none;
 } 
 
-.switch a:hover,
-.switch a:visited{
+.form-link a:hover{
   color: var(--primary-color);
   text-decoration: none;
 } 
@@ -545,12 +568,13 @@ footer{
   color: var(--secondary-color);
   padding: 4%;
 }
-
+/* End Footer */
 
 @media(min-width: 426px) and (max-width: 1023px){
   h1{
     font-size: 2rem;
   }
+  
   .btn{
     font-size: 1.1rem;    
   }
@@ -606,6 +630,11 @@ footer{
     font-size: 2.2rem;
     margin-bottom: 2%;
   }
+
+  .title{
+    margin-top: -2%;
+  }
+  
 
   main{
     margin: 0 auto;
@@ -689,6 +718,12 @@ footer{
     margin: 1% auto;
     width: 40%;
   }
+
+  .login-form input{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
   /* End Login Form */
 
 

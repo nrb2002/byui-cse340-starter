@@ -152,10 +152,9 @@ Util.buildInventoryGrid = async function(item){
 }
 
 /* **************************************
-* Build the Inventory Detail view HTML
+* Build the Login view HTML
 * ************************************ */
-//Build an asynchronous function that creates a grid for data returned as an array
-//from the model query
+//Build an asynchronous function that creates a login form
 Util.getLoginForm = async function(req, res, next){
   let loginForm  
   
@@ -163,44 +162,134 @@ Util.getLoginForm = async function(req, res, next){
   loginForm += '<div class="form-card">'
   loginForm += '<h2>Please enter your credentials</h2>'
   loginForm += '<hr>'
+
   loginForm += '<form class="login-form">'
   loginForm += '<label for="account_username">Username</label>'
-  loginForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username">'
+  loginForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username" required>'
 
   loginForm += '<label for="account_password">Password</label>'
-  loginForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password">'
+  loginForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
+  loginForm += '<div class="togglePasswd"><input type="checkbox" onclick="togglePassword()"><label>Show Password</label></div>'
+  loginForm += '<small>The password must contain at least 12 characters, 1 capital letter, 1 number, and 1 special character.</small>'
 
   loginForm += '<input class="btn" type="submit" value="Sign in">'
 
   loginForm += '</form>'
 
-  loginForm += '<div class="switch">Dont have an account? <a href="#" onclick="switchCard()">Register here.</a>'
+  loginForm += '<div class="form-link">Forgot password? <a href="/account/username">Click here to reset.</a>'
+  loginForm += '<div class="form-link">Dont have an account? <a href="/account/register">Sign up now!</a>'
   loginForm += '</div>'
   loginForm += '</div>'
-
-  // registrationForm += '<div class="form-card" style="display: none;">'
-  // registrationForm += '<h2>Register Form</h2>'
-  // registrationForm += '<form>'
-  // registrationForm += '<label for="fullname">Full Name</label>'
-  // registrationForm += '<input type="text" id="fullname" placeholder="Enter your full name">'
-
-  // registrationForm += '<label for="email">Email</label>'
-  // registrationForm += '<input type="email" id="email" placeholder="Enter your email">'
-
-  // registrationForm += '<label for="new-password">New Password</label>'
-  // registrationForm += '<input type="password" id="new-password" placeholder="Enter your new password">'
-
-  // registrationForm += '<input class="btn" type="submit" value="Register">'
-  // registrationForm += '</form>'
-
-  // registrationForm += '<div class="switch">Already have an account? <a href="#" onclick="switchCard()">Login here</a></div>'
-  // registrationForm += '</div>'
-  // registrationForm += '</div>'
 
   return loginForm 
 }
 
+/* **************************************
+* Build the Register view HTML
+* ************************************ */
+//Build an asynchronous function that creates a registration form
+Util.getRegisterForm = async function(req, res, next){
+  let registerForm  
+ 
+  registerForm = '<div class="login-container">'
+  registerForm += '<div class="form-card">'
+  registerForm += '<h2>Please fill out this form to register</h2>'
+  registerForm += '<hr>'
+  registerForm += '<form class="login-form">'
+  registerForm += '<legend><small>All fields are required.</small></legend><br><br>'
+  registerForm += '<label for="account_firstname">Firstname</label>'
+  registerForm += '<input type="text" id="account_firstname" name="account_firstname" placeholder="Enter your Firstname" required>'
+  
+  registerForm += '<label for="account_lastname">Lastname</label>'
+  registerForm += '<input type="text" id="account_lastname" name="account_lastname" placeholder="Enter your Lastname" required>'
 
+  registerForm += '<form class="login-form">'
+  registerForm += '<label for="account_username">Username</label>'
+  registerForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username" required>'
+
+  registerForm += '<label for="account_password">Password</label>'
+  registerForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
+  registerForm += '<div class="togglePasswd"><input type="checkbox" onclick="togglePassword()"><label>Show Password</label></div>'
+
+  registerForm += '<small>The password must contain at least 12 characters, 1 capital letter, 1 number, and 1 special character.</small>'
+
+  registerForm += '<label for="account_confirm_password">Confirm Password</label>'
+  registerForm += '<input type="password" id="account_confirm_password" name="account_confirm_password" placeholder="Confirm your password" required>'
+  
+  registerForm += '<label for="account_type">Account Type</label>'
+  registerForm += '<select name="account_type" id="account_type">'
+  registerForm += '<option value="">-- Select a type</option>'
+  registerForm += '<option value="User">User</option>'
+  registerForm += '<option value="Admin">Admin</option>'
+  registerForm += '</select>'
+
+  registerForm += '<input class="btn" type="submit" value="Sign up">'
+  registerForm += '</form>'
+
+  registerForm += '<div class="form-link">Already have an account? <a href="/account/login" >Sign in here.</a></div>'
+  
+  registerForm += '</div>'
+  registerForm += '</div>'
+
+  return registerForm 
+}
+
+/* **************************************
+* Build the username view HTML
+* ************************************ */
+//Build an asynchronous function that creates a login form
+Util.getUsernameForm = async function(req, res, next){
+  let usernameForm  
+  
+  usernameForm = '<div class="login-container">'
+  usernameForm += '<div class="form-card">'
+  // usernameForm += '<h2>Please enter your username</h2>'
+  // usernameForm += '<hr>'
+
+  usernameForm += '<form class="login-form">'
+  usernameForm += '<legend>All fields are required.</legend><br><br>'
+  usernameForm += '<label for="account_username">Username</label>'
+  usernameForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username">'
+  usernameForm += '<input class="btn" type="submit" value="Verify">'
+  usernameForm += '<div class="form-link"><a href="/account/login" >Back to login page.</a></div>'
+  usernameForm += '</form>'
+
+  usernameForm += '</div>'
+  usernameForm += '</div>'
+
+  return usernameForm 
+}
+
+/* **************************************
+* Build the Reinitialize view HTML
+* ************************************ */
+//Build an asynchronous function that creates a registration form
+Util.getResetForm = async function(req, res, next){
+  let resetForm  
+ 
+  resetForm = '<div class="login-container">'
+  resetForm += '<div class="form-card">'
+  resetForm += '<h2>Please fill out this form to register</h2><hr>'
+  resetForm += '<form class="login-form">'
+  resetForm += '<legend><small>All fields are required.</small></legend><br><br>'
+
+  resetForm += '<label for="account_password">New Password</label>'
+  resetForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your new password" required>'
+  resetForm += '<div class="togglePasswd"><input type="checkbox" onclick="togglePassword()"><label>Show Password</label></div>'
+  resetForm += '<small>The password must contain at least 12 characters, 1 capital letter, 1 number, and 1 special character.</small>'
+
+  resetForm += '<label for="account_confirm_password">Confirm Password</label>'
+  resetForm += '<input type="password" id="account_confirm_password" name="account_confirm_password" placeholder="Re-enter your new password" required>'
+
+  resetForm += '<input class="btn" type="submit" value="Save">'
+  resetForm += '</form>'
+
+  resetForm += '<div class="form-link">Already have an account? <a href="/account/login" >Sign in here.</a></div>'
+  resetForm += '</div>'
+  resetForm += '</div>'
+
+  return resetForm 
+}
 
 /* **************************************
 * Build the 404 error background
