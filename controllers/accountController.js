@@ -92,8 +92,8 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
-      // loginForm,
-      // errors: null,
+      loginForm,
+      errors: null,
     })
   } else {
     //If failed flash error message
@@ -101,8 +101,8 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Register",
       nav,
-      // registerForm,
-      // errors: null,
+      registerForm,
+      errors: null,
     })
   }
 }
