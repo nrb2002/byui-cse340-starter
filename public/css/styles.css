@@ -6,7 +6,7 @@
   --primary-color:#6A2055;
   --secondary-color: #F4E2DE;
   --accent-1:#928b8b;
-  --accent-2:#007BFF;
+  --accent-2:#15069c;
   --accent-3:#f8eeee;
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
@@ -530,9 +530,9 @@ li.nav-data{
 }
 
 .login-form small{
-  font-style: italic;
+  font-weight: bold;
   color:var(--primary-color);
-  /* font-size:small; */
+  font-size:.9rem;
   text-align: left;
   margin-bottom: 4%;
 }
