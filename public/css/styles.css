@@ -5,8 +5,9 @@
    */
   --primary-color:#6A2055;
   --secondary-color: #F4E2DE;
-  --accent-1:#d6caca;
+  --accent-1:#928b8b;
   --accent-2:#007BFF;
+  --accent-3:#f8eeee;
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
 
@@ -194,6 +195,15 @@ button:hover,
   border: solid 2px black;
   background-color: var(--secondary-color);
   color: black;  
+}
+
+input[type=text],
+input[type=checkbox],
+input[type=radio],
+input[type=password],
+select{
+  background-color: var(--accent-3);
+  border: 1px solid var(--primary-color);
 }
 
 /* #wrapper{  
