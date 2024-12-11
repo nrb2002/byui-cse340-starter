@@ -6,9 +6,11 @@ const utilities = require("../utilities") //Import utilities
 * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav()
-  res.render("./account/login", {
+  const loginForm = await utilities.getLoginForm()
+  res.render("account/login", {
     title: "Login",
     nav,
+    loginForm,
   })
 }
 

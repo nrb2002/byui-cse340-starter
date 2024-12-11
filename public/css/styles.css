@@ -209,9 +209,9 @@ button:hover,
 
 #top-header a{
   color: var(--secondary-color);
-  font-size: .9rem;
-  
+  font-size: .9rem;  
 }
+
 #tools{
   border: 1px solid #F4E2DE;
   height: fit-content;
@@ -384,7 +384,7 @@ ul.notice {
 }
 
 /* Inventory Display */
-.item-title{
+.title{
   background-color: var(--secondary-color);
   padding: 2%;
   margin-bottom: .5%;
@@ -477,21 +477,28 @@ li.nav-data{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  margin-top: 2%;
+  height: auto;
 }
 
-.login-card {
-  width: 300px;
+.form-card {
+  width: 100%;
   background-color: #fff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: solid 1px lightgray;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   text-align: center;
 }
 
 .login-container h2 {
-  color: #007BFF;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.login-container h2,
+.login-container hr{
+  margin-bottom: 4%;
 }
 
 .login-form {
@@ -504,23 +511,15 @@ li.nav-data{
   margin-bottom: 5px;
 }
 
-.login-form input {
+.login-form input{
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-/* button {
-  padding: 10px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-} */
-
-/* .switch {
+.switch {
   margin-top: 15px;
   font-size: 14px;
 }
@@ -528,7 +527,13 @@ li.nav-data{
 .switch a {
   color: #007BFF;
   text-decoration: none;
-} */
+} 
+
+.switch a:hover,
+.switch a:visited{
+  color: var(--primary-color);
+  text-decoration: none;
+} 
 
 /* End Login Form */
 
@@ -587,6 +592,13 @@ footer{
   }
 
   /* Inventory Display */
+
+  /* Login Form */
+  .login-container {
+    margin: 2% auto;
+    width: 60%;
+  }
+  /* End Login Form */
 }
 
 @media(min-width: 1024px){
@@ -604,7 +616,7 @@ footer{
     display: none;
   }
   .navbar{
-    padding: 1%;
+    padding: .5%;
   }
 
   .nav-menu{    
@@ -671,6 +683,13 @@ footer{
     width: 60%;
   }
   /* Error content display */
+
+  /* Login Form */
+  .login-container {
+    margin: 1% auto;
+    width: 40%;
+  }
+  /* End Login Form */
 
 
 }

@@ -156,48 +156,48 @@ Util.buildInventoryGrid = async function(item){
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array
 //from the model query
-Util.buildLogin = async function(){
-  let login  
+Util.getLoginForm = async function(req, res, next){
+  let loginForm  
   
-  login = '<div class="item-display">'
+  loginForm = '<div class="login-container">'
+  loginForm += '<div class="form-card">'
+  loginForm += '<h2>Please enter your credentials</h2>'
+  loginForm += '<hr>'
+  loginForm += '<form class="login-form">'
+  loginForm += '<label for="account_username">Username</label>'
+  loginForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username">'
 
-  login += '<div class="login-container">'
-  login += '<div class="login-card">'
-  login += '<h2>Login Form</h2>'
-  login += '<form class="login-form">'
-  login += '<label for="username">Username</label>'
-  login += '<input type="text" id="username" placeholder="Enter your username">'
+  loginForm += '<label for="account_password">Password</label>'
+  loginForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password">'
 
-  login += '<label for="password">Password</label>'
-  login += '<input type="password" id="password" placeholder="Enter your password">'
+  loginForm += '<input class="btn" type="submit" value="Sign in">'
 
-  login += '<button type="submit">Login</button>'
-  login += '</form>'
-  login += '<div class="switch">Don\'t have an account? <a href="#" onclick="switchCard()">Register here</a></div>'
-  login += '</div>'
+  loginForm += '</form>'
 
-  login += '<div class="login-card" style="display: none;">'
-  login += '<h2>Register Form</h2>'
-  login += '<form>'
-  login += '<label for="fullname">Full Name</label>'
-  login += '<input type="text" id="fullname" placeholder="Enter your full name">'
+  loginForm += '<div class="switch">Dont have an account? <a href="#" onclick="switchCard()">Register here.</a>'
+  loginForm += '</div>'
+  loginForm += '</div>'
 
-  login += '<label for="email">Email</label>'
-  login += '<input type="email" id="email" placeholder="Enter your email">'
+  // registrationForm += '<div class="form-card" style="display: none;">'
+  // registrationForm += '<h2>Register Form</h2>'
+  // registrationForm += '<form>'
+  // registrationForm += '<label for="fullname">Full Name</label>'
+  // registrationForm += '<input type="text" id="fullname" placeholder="Enter your full name">'
 
-  login += '<label for="new-password">New Password</label>'
-  login += '<input type="password" id="new-password" placeholder="Enter your new password">'
+  // registrationForm += '<label for="email">Email</label>'
+  // registrationForm += '<input type="email" id="email" placeholder="Enter your email">'
 
-  login += '<button type="submit">Register</button>'
-  login += '</form>'
-  login += '<div class="switch">Already have an account? <a href="#" onclick="switchCard()">Login here</a></div>'
-  login += '</div>'
-  login += '</div>'
+  // registrationForm += '<label for="new-password">New Password</label>'
+  // registrationForm += '<input type="password" id="new-password" placeholder="Enter your new password">'
 
-    
-    
+  // registrationForm += '<input class="btn" type="submit" value="Register">'
+  // registrationForm += '</form>'
 
-  return login 
+  // registrationForm += '<div class="switch">Already have an account? <a href="#" onclick="switchCard()">Login here</a></div>'
+  // registrationForm += '</div>'
+  // registrationForm += '</div>'
+
+  return loginForm 
 }
 
 
