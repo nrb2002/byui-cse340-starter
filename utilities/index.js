@@ -164,8 +164,8 @@ Util.getLoginForm = async function(req, res, next){
   loginForm += '<hr>'
 
   loginForm += '<form class="login-form">'
-  loginForm += '<label for="account_username">Username</label>'
-  loginForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username" required>'
+  loginForm += '<label for="account_email">Email address</label>'
+  loginForm += '<input type="text" id=account_email" name="account_email" placeholder="Enter your username" required>'
 
   loginForm += '<label for="account_password">Password</label>'
   loginForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
@@ -195,31 +195,32 @@ Util.getRegisterForm = async function(req, res, next){
   registerForm += '<div class="form-card">'
   registerForm += '<h2>Please fill out this form to register</h2>'
   registerForm += '<hr>'
-  registerForm += '<form class="login-form">'
-  registerForm += '<legend><small>All fields are required.</small></legend><br><br>'
+
+  registerForm += '<form class="login-form" id="registerForm" action="/account/register" method="post">'
+
+  registerForm += '<p><small>All fields are required.</small></p><br><br>'
+
   registerForm += '<label for="account_firstname">Firstname</label>'
   registerForm += '<input type="text" id="account_firstname" name="account_firstname" placeholder="Enter your Firstname" required>'
   
   registerForm += '<label for="account_lastname">Lastname</label>'
   registerForm += '<input type="text" id="account_lastname" name="account_lastname" placeholder="Enter your Lastname" required>'
-
-  registerForm += '<form class="login-form">'
-  registerForm += '<label for="account_username">Username</label>'
-  registerForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username" required>'
+  
+  registerForm += '<label for="account_email">Email</label>'
+  registerForm += '<input type="text" id=account_email" name="account_email" placeholder="Enter your email address" required>'
 
   registerForm += '<label for="account_password">Password</label>'
   registerForm += '<input type="password" id="account_password" name="account_password" placeholder="Enter your password" required>'
-  registerForm += '<div class="togglePasswd"><input type="checkbox" onclick="togglePassword()"><label>Show Password</label></div>'
-
   registerForm += '<small>The password must contain at least 12 characters, 1 capital letter, 1 number, and 1 special character.</small>'
 
   registerForm += '<label for="account_confirm_password">Confirm Password</label>'
   registerForm += '<input type="password" id="account_confirm_password" name="account_confirm_password" placeholder="Confirm your password" required>'
-  
+  registerForm += '<label class="togglePasswd"><input type="checkbox" onclick="togglePassword()">Show password</label>'
+
   registerForm += '<label for="account_type">Account Type</label>'
   registerForm += '<select name="account_type" id="account_type">'
   registerForm += '<option value="">-- Select a type</option>'
-  registerForm += '<option value="User">User</option>'
+  registerForm += '<option value="Client">Client</option>'
   registerForm += '<option value="Admin">Admin</option>'
   registerForm += '</select>'
 
@@ -247,9 +248,9 @@ Util.getUsernameForm = async function(req, res, next){
   // usernameForm += '<hr>'
 
   usernameForm += '<form class="login-form">'
-  usernameForm += '<legend>All fields are required.</legend><br><br>'
-  usernameForm += '<label for="account_username">Username</label>'
-  usernameForm += '<input type="text" id=account_username" name="account_username" placeholder="Enter your username">'
+  
+  usernameForm += '<label for="account_email">Username</label>'
+  usernameForm += '<input type="text" id=account_email" name="account_email" placeholder="Enter your username">'
   usernameForm += '<input class="btn" type="submit" value="Verify">'
   usernameForm += '<div class="form-link"><a href="/account/login" >Back to login page.</a></div>'
   usernameForm += '</form>'

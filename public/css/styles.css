@@ -191,10 +191,11 @@ button,
 }
 
 button:hover,
-.btn:hover{
+.btn:hover,
+input[type=submit]:hover{
   border: solid 2px black;
   background-color: var(--secondary-color);
-  color: black;  
+  color: black; 
 }
 
 input[type=text],
@@ -530,7 +531,7 @@ li.nav-data{
 
 .login-form small{
   font-style: italic;
-  color: red;
+  color:var(--primary-color);
   /* font-size:small; */
   text-align: left;
   margin-bottom: 4%;
@@ -726,7 +727,7 @@ footer{
   /* Login Form */
   .login-container {
     margin: 1% auto;
-    width: 40%;
+    width: 50%;
   }
 
   .login-form input{

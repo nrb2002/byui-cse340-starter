@@ -1,4 +1,8 @@
-const utilities = require("../utilities") //Import utilities
+//Import utilities
+const utilities = require("../utilities") 
+
+//Import Account Model
+const accountModel = require("../models/account-model") 
 
 
 /* ****************************************
@@ -57,5 +61,57 @@ async function buildReset(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, buildUsername, buildReset }
+/* ****************************************
+*  Process Registration
+* *************************************** */
+async function registerAccount(req, res) {
+  let nav = await utilities.getNav()
+  //Get the data from the form
+  const { 
+    account_firstname, 
+    account_lastname, 
+    account_email, 
+    account_password  
+  } = req.body
+
+  //Pass the data from the form to the model to be inserted into the database
+  const regResult = await accountModel.registerAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password
+  )
+
+  if (regResult) {
+    //If successful insertion of data, flash confirmation message
+    req.flash(
+      "notice",
+      `Congratulations, you\'re registered ${account_firstname}. Please log in.`
+    )
+    //If successful insertion of data, go to login page
+    res.status(201).render("account/login", {
+      title: "Login",
+      nav,
+      // loginForm,
+      // errors: null,
+    })
+  } else {
+    //If failed flash error message
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("account/register", {
+      title: "Register",
+      nav,
+      // registerForm,
+      // errors: null,
+    })
+  }
+}
+
+
+
+
+
+
+
+module.exports = { buildLogin, buildRegister, buildUsername, buildReset, registerAccount }
 

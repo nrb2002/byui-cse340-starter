@@ -25,10 +25,15 @@ const utilities = require("./utilities/")
 const session = require("express-session") 
 
 //Import database connection
-const pool = require('./database/') 
+const pool = require("./database/") 
+
+//Import body-parser
+const bodyParser = require("body-parser")
+
+
 
 /* ***********************
- * Middleware - Session
+ * Middleware - Section
  * ************************/
 //Connect-pg-simple middleware
 app.use(session({ //app.use() applies whatever is being invoked throughout the entire application
@@ -53,6 +58,12 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+//Enable body-parser
+app.use(bodyParser.json()) //tells the express application to use the body parser to work with JSON data 
+app.use(bodyParser.urlencoded({ extended: true })) // tells the express application to read and work with data sent via a URL as well as from a form
+
+
 
 /* ***********************
  * View Engine and Templates

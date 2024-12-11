@@ -32,6 +32,12 @@ router.get("/username", utilities.handleErrors(accountController.buildUsername))
 //Get the route sent when the 'Reinitialize' link is clicked
 router.get("/reset", utilities.handleErrors(accountController.buildReset));
 
+/***************************
+ * Post data from register view 
+ * *************************/ 
+//Get the route sent when the 'Sign up' link is clicked
+router.post("/register", utilities.handleErrors(accountController.registerAccount));
+
 
 //export router
 module.exports = router;
