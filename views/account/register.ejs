@@ -7,8 +7,18 @@
     res.redirect('/')
 } %>
 
-<!-- Commented now. To be enabled later -->
-<% messages() %>
+<!-- Flash notifications -->
+<%- messages() %>
+<!--If there are errors, create an unordered list with a class for styling.
+    create a list item and display the message attached to the error element.
+-->
+<% if (errors) { %>
+    <ul class="notice-error">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 
 <!-- This is the main content to be displayed in the view -->
 

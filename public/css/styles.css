@@ -7,7 +7,7 @@
   --secondary-color: #F4E2DE;
   --accent-1:#928b8b;
   --accent-2:#15069c;
-  --accent-3:#f8eeee;
+  --accent-3:#fcf9f9;
   
   --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
 
@@ -207,6 +207,14 @@ select{
   border: 1px solid var(--primary-color);
 }
 
+input:required:valid {
+  border: 2px solid green;
+}
+
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red ;
+}
+
 /* #wrapper{  
   background-color: var(--secondary-color);
 } */
@@ -317,12 +325,21 @@ main{
 /* Hero */
 
 /*Flash message style*/
-ul.notice {
-  background: var(--secondary-color);
-  color: var(--primary-color);
+ul.notice-success,
+ul.notice-error {
   padding: 2%;
   font-size: 1.1rem;
-  margin-bottom: 4%;
+  margin: 0 auto;
+  width: 50%;
+}
+
+ul.notice-success {
+  background: #e4f3da;
+}
+ul.notice-error {
+  background-color: var(--accent-3);
+  color: red;
+  font-weight: bold;
 }
 /*Flash message style*/
 
@@ -514,22 +531,22 @@ li.nav-data{
   margin-bottom: 4%;
 }
 
-.login-form {
+.account-form {
   display: flex;
   flex-direction: column;
 }
-.login-form .togglePasswd input{  
+.account-form .togglePasswd input{  
   width: fit-content;
 }
 
-.login-form .togglePasswd{  
+.account-form .togglePasswd{  
   width: 100%;
   display: flex;
   gap: 4%;
   padding: 2%;
 }
 
-.login-form small{
+.account-form small{
   font-weight: bold;
   color:var(--primary-color);
   font-size:.9rem;
@@ -537,19 +554,19 @@ li.nav-data{
   margin-bottom: 4%;
 }
 
-.login-form label {
+.account-form label {
   text-align: left;
   margin-bottom: 5px;
 }
 
-.login-form input,
-.login-form select{
+.account-form input,
+.account-form select{
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-.login-form input{
+.account-form input{
   border: none;
   border-bottom: 1px solid var(--secondary-color);
 }
@@ -730,10 +747,16 @@ footer{
     width: 50%;
   }
 
-  .login-form input{
+  .account-form input{
     border: 1px solid #ddd;
     border-radius: 5px;
   }
+
+  .account-form input[type=submit]{
+    width: 60%;
+    margin: 2% auto;
+  }
+  
 
   /* End Login Form */
 

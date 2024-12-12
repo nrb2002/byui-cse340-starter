@@ -7,6 +7,7 @@ const express = require("express") //Import Express
 const router = new express.Router() //Use Express to create a router object
 const accountController = require("../controllers/accountController") //Import the Inventory controller
 const utilities = require("../utilities") //Import utilities
+const regValidate = require("../utilities/account-validation") //Import the validation function
 
 /***************************
  * Deliver login view  
@@ -36,8 +37,17 @@ router.get("/reset", utilities.handleErrors(accountController.buildReset));
  * Post data from register view 
  * *************************/ 
 //Get the route sent when the 'Sign up' link is clicked
-router.post("/register", utilities.handleErrors(accountController.registerAccount));
+// router.post("/register", utilities.handleErrors(accountController.registerAccount));
 
+// Process the registration data, run the validation, and handle errors if any
+router.post(
+    "/register",
+    regValidate.registationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(accountController.registerAccount)
+  )
+
+  
 
 //export router
 module.exports = router;

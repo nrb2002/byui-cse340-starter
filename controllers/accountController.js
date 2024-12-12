@@ -1,3 +1,7 @@
+/* ****************************************
+*  Deliver register view
+* *************************************** */
+
 //Import utilities
 const utilities = require("../utilities") 
 
@@ -66,6 +70,8 @@ async function buildReset(req, res, next) {
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
+  const loginForm = await utilities.getLoginForm()
+  const registerForm = await utilities.getRegisterForm()
   //Get the data from the form
   const { 
     account_firstname, 
@@ -85,8 +91,8 @@ async function registerAccount(req, res) {
   if (regResult) {
     //If successful insertion of data, flash confirmation message
     req.flash(
-      "notice",
-      `Congratulations, you\'re registered ${account_firstname}. Please log in.`
+      "notice-success",
+      `Congratulations, <strong>${account_firstname}</strong>! You've registered successfully! Feel free to sign in to your account.`
     )
     //If successful insertion of data, go to login page
     res.status(201).render("account/login", {
@@ -97,7 +103,7 @@ async function registerAccount(req, res) {
     })
   } else {
     //If failed flash error message
-    req.flash("notice", "Sorry, the registration failed.")
+    req.flash("notice-error", "Sorry, the registration failed! Please try again. ")
     res.status(501).render("account/register", {
       title: "Register",
       nav,
