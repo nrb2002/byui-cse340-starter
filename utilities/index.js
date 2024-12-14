@@ -163,7 +163,7 @@ Util.getLoginForm = async function(req, res, next){
   loginForm += '<h2>Please enter your credentials</h2>'
   loginForm += '<hr>'
 
-  loginForm += '<form class="account-form">'
+  loginForm += '<form class="account-form" id="loginForm" action="/account/login" method="post">'
   loginForm += '<label for="account_email">Username</label>'
   loginForm += '<input type="email" id=account_email" name="account_email" placeholder="Enter your email address" required>'
 
@@ -203,7 +203,7 @@ Util.getRegisterForm = async function(req, res, next){
   registerForm += '<p><small>All fields are required.</small></p><br><br>'
 
   registerForm += '<label for="account_firstname">Firstname</label>'
-  registerForm += '<input type="text" id="account_firstname" name="account_firstname" placeholder="Enter your Firstname" required>'
+  registerForm += '<input type="text" id="account_firstname" name="account_firstname" placeholder="Enter your Firstname" value="<%= locals.account_firstname %>" required>'
   
   registerForm += '<label for="account_lastname">Lastname</label>'
   registerForm += '<input type="text" id="account_lastname" name="account_lastname" placeholder="Enter your Lastname" required>'
