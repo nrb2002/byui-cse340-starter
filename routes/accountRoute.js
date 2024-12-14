@@ -34,6 +34,17 @@ router.get("/username", utilities.handleErrors(accountController.buildUsername))
 router.get("/reset", utilities.handleErrors(accountController.buildReset));
 
 /***************************
+ * Post data from login view 
+ * *************************/ 
+// Process the login attempt
+router.post(
+  "/login",
+  (req, res) => {
+    res.status(200).send('login process') //the request was successful and returns "login process" to the browser
+  }
+)
+
+/***************************
  * Post data from register view 
  * *************************/ 
 //Get the route sent when the 'Sign up' link is clicked
