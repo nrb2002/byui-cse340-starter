@@ -55,15 +55,11 @@ validate.checkLoginData = async (req, res, next) => {
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    const loginForm = await utilities.getLoginForm()
     res.render("account/login", {
       errors,
       title: "Login",
-      nav,
-      
+      nav,      
       account_email,
-
-      loginForm,
     })
     return
   }
@@ -142,7 +138,6 @@ validate.checkRegData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      const registerForm = await utilities.getRegisterForm()
       res.render("account/register", {
         errors,
         title: "Registration",
@@ -151,12 +146,80 @@ validate.checkRegData = async (req, res, next) => {
         account_firstname,
         account_lastname,
         account_email,
-
-        registerForm,
       })
       return
     }
     next()
   }
+
+/************************************************************************************************** */
+/** RESET VALIDATIONS */
+/************************************************************************************************** */
+
+/*  **********************************
+  *  Reset Data Validation Rules
+  * ********************************* */
+ /* 
+ This is a function that will return an array of rules to be used when checking the incoming data. 
+ Each rule focuses on a specific input from the registration form.
+  */
+ validate.resetRules = () => {
+  return [
+    // valid email is required and cannot already exist in the DB
+    body("account_email")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isEmail()
+    .normalizeEmail() // refer to validator.js docs
+    .withMessage("A valid email is required.")
+    //Check if email exists in the database before creating a new user
+    .custom(async (account_email) => {
+      const emailExists = await accountModel.checkExistingEmail(account_email)
+      if (emailExists){
+        throw new Error("Email exists. Please log in or use different email")
+      }
+    }),
+
+    // password is required and must be strong password
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+  ]
+}
+
+   /* ******************************
+ * Check data and return errors or continue to registration
+ * ***************************** */
+/*
+if errors are found, then the errors, along with the initial data, 
+will be returned to the registration view for correction
+
+*/
+validate.checkResetData = async (req, res, next) => {
+  const {account_email } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/reset", {
+      errors,
+      title: "Reset Password",
+      nav,
+      
+      account_email,
+    })
+    return
+  }
+  next()
+}
   
   module.exports = validate

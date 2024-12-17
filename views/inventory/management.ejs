@@ -1,3 +1,7 @@
+<!-- /*************************** 
+ * Deliver management view  
+ * *************************/ 
+-->
 <!-- Check to see if a title variable exists -->
 <% if (title) { %>
     <!-- if a title variable exists, then display it as an h1 -->
@@ -9,24 +13,19 @@
 
 <!-- Flash notifications -->
 <%- messages() %>
-<!--If there are errors, create an unordered list with a class for styling.
-    create a list item and display the message attached to the error element.
--->
-<% if (errors) { %>
-    <ul class="notice-error">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
 
 <!-- This is the main content to be displayed in the view -->
 
-<div class="form-container">
-    <div class="form-card">
-        <h2>Please fill out this form to register</h2><hr> 
+<div class="management">
+   <a class="btn" href="./add-classification">Add New Classification</a>
+   <a class="btn" href="./new-vehicle">Add New Vehicle</a>
+</div>
 
-        <form class="account-form" id="registerForm" action="/account/register" method="post">
+<!-- <div class="form-container">
+    <div class="form-card">
+        <h2>Inventory Management Form</h2><hr> 
+
+        <form class="account-form" id="managementForm" action="/account/management" method="post">
     
             <p><small>All fields are required.</small></p><br><br>
         
@@ -60,7 +59,7 @@
         <div class="form-link">Already have an account? <a href="/account/login" >Sign in here.</a></div>
     
     </div>
-</div>
+</div> -->
 
 
 

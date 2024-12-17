@@ -1,6 +1,12 @@
 //Import the pool object containing the database connection string
 const pool = require("../database/") 
 
+/***************************************************************************************** */
+
+ // EVERYTHING ABOUT CLASSIFICATIONS
+
+/***************************************************************************************** */
+
 /* ***************************
  *  Get all classification data
  * ************************** */
@@ -9,6 +15,35 @@ const pool = require("../database/")
 //from the Classification table
 async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+}
+
+/* **********************
+ *   Check for existing classification
+ * ********************* */
+/*
+Hopefully, this function looks familiar. 
+It queries the database to see if a record exists with the same email that is being submitted. It returns the count of rows found. Anything greater than zero means the email already exists in the database.
+*/
+async function checkExistingClassification(classification_name){
+  try {
+    const sql = "SELECT * FROM public.classification WHERE classification_name = $1"
+    const classification_name = await pool.query(sql, [classification_name])
+    return classification_name.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* *****************************
+*   Insert new classification
+* *************************** */
+async function addClassification(classification_name){
+  try {
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
 }
 
 /* ***************************
@@ -45,4 +80,12 @@ async function getItemByInventoryId(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getItemByInventoryId};
+
+
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getItemByInventoryId, 
+  checkExistingClassification, 
+  addClassification
+};

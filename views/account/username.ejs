@@ -8,8 +8,19 @@
 } %>
 
 <!-- Commented now. To be enabled later -->
-<% messages() %>
+<%- messages() %>
 
 <!-- This is the main content to be displayed in the view -->
 
-<%- usernameForm %>
+<div class="form-container">
+    <div class="form-card">
+        <h2>Please enter your username</h2>
+        <hr>  
+        <form class="account-form" action="/account/username" method="post">    
+            <label for="account_email">Username</label>
+            <input type="email" id="account_email" name="account_email" placeholder="Enter your username">
+            <input class="btn" type="submit" value="Verify">
+            <div class="form-link"><a href="/account/login" >Back to login page.</a></div>
+        </form>  
+    </div>
+</div>

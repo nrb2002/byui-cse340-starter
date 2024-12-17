@@ -4,6 +4,71 @@ const utilities = require("../utilities/") //Import utilities
 const invCont = {} //Create an empty object of invCont
 
 /* ***************************
+ *  Build management view
+ * ************************** */
+//Create an asynchronous function that returns the management view
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav() //calls the function to build the navigation bar for use in the view and stores it in the nav variable
+    
+  //calls the Express render function to return a view to the browser
+  res.render("./inventory/management", {
+    title: 'Vehicle Management',
+    nav,
+  })
+}
+
+/* ***************************
+ *  Build Add Classification view
+ * ************************** */
+//Create an asynchronous function that returns the management view
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav() 
+    
+  //calls the Express render function to return a view to the browser
+  res.render("./inventory/add-classification", {
+    title: 'New Classification',
+    nav,
+    errors: null,
+  })
+}
+
+/* ****************************************
+*  Process Classification creation
+* *************************************** */
+invCont.addClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  
+  //Get the data from the form
+  const {classification_name} = req.body
+
+  //Pass the data from the form to the model to be inserted into the database
+  const classResult = await invModel.addClassification(classification_name)
+
+  if (classResult) {
+    //If successful insertion of data, flash confirmation message
+    req.flash(
+      "notice-success",
+      `Classification <strong>${classification_name}</strong> created successfully!`
+    )
+    //If successful insertion of data, go to management view
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    //If failed flash error message
+    req.flash("notice-error", "Sorry, we were unable add this new classification! Please try again. ")
+    res.status(501).render("./inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+
+/* ***************************
  *  Build inventory by classification view
  * ************************** */
 //Create an asynchronous function that pulls the vehicles by classification

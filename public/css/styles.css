@@ -9,7 +9,8 @@
   --accent-2:#15069c;
   --accent-3:#fcf9f9;
   
-  --gradient: linear-gradient(to top, var(--secondary-color), var(--primary-color));
+  --gradient: linear-gradient(315deg, var(--accent-2) 0%, var(--primary-color) 100%);
+  --valid: rgb(189, 242, 189);
 
   --shadow:  4px 4px var(--secondary-color);
   /**
@@ -185,14 +186,14 @@ button,
   font-size: .95rem;
   padding: 2%;
   border-radius: 4px;
-  margin-top: 1rem; 
-  width: 80%;
+  margin: 1rem auto; 
   height: 2.5rem;
+  width:100%;
 }
 
 button:hover,
 .btn:hover,
-input[type=submit]:hover{
+input[type=submit]:hover {
   border: solid 2px black;
   background-color: var(--secondary-color);
   color: black; 
@@ -208,11 +209,11 @@ select{
 }
 
 input:required:valid {
-  border: 2px solid green;
+  background-color: var(--valid);
 }
 
 input:required:invalid, input:focus:invalid {
-  border: 2px solid red ;
+  background-color: var(--secondary-color);
 }
 
 /* #wrapper{  
@@ -317,6 +318,7 @@ input:required:invalid, input:focus:invalid {
 
 main{
   max-width: 1200px;
+  min-height: 70vh;
   margin: -.5rem auto;
   padding: 4%;
   background-color: white;
@@ -503,7 +505,7 @@ li.nav-data{
 /* Error content display */
 
 /* Login Form */
-.login-container {
+.form-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -521,13 +523,33 @@ li.nav-data{
   text-align: center;
 }
 
-.login-container h2 {
+.form-card.login-card {
+  max-width: 500px;
+}
+
+.form-card.login-card input:required:invalid,  
+.form-card.login-card input:required:focus{
+  border-color: var(--accent-1);
+  background-color: var(--secondary-color);
+  border-style: double;
+} 
+
+.form-card.login-card input:valid {
+  border-color: var(--accent-1);
+  background-color: var(--valid);
+} 
+
+.form-card.login-card button{
+  width: 100%;
+}
+
+.form-container h2 {
   font-size: 1.1rem;
   font-style: italic;
 }
 
-.login-container h2,
-.login-container hr{
+.form-container h2,
+.form-container hr{
   margin-bottom: 4%;
 }
 
@@ -585,8 +607,22 @@ li.nav-data{
   color: var(--primary-color);
   text-decoration: none;
 } 
-
 /* End Login Form */
+
+/* Vehicle Management Page Style */
+.management{
+  display: grid;
+  gap: 2%;
+}
+
+.management .btn{
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 0 0;
+  
+}
+
+/* Vehicle Management Page Style */
 
 
 /* Footer */
@@ -643,14 +679,26 @@ footer{
     font-size: 1.2rem;
   }
 
+  button,
+  .btn{
+    width: 50%; 
+  }
+
   /* Inventory Display */
 
-  /* Login Form */
-  .login-container {
+  /* Form container */
+  .form-container {
     margin: 2% auto;
-    width: 60%;
+    /* width: 60%; */
   }
   /* End Login Form */
+
+  /* Vehicle Management Page Style */
+  .management{
+    grid-template-columns: 1fr 1fr;
+  }
+  /* End Vehicle Management Page Style */
+
 }
 
 @media(min-width: 1024px){
@@ -687,8 +735,10 @@ footer{
   }
 
   button,
-  .btn{
-    font-size: 1.1rem;    
+  .btn,
+  a.btn{
+    font-size: 1.1rem; 
+    width: 50%;   
   }
 
   .hero-car-details{
@@ -742,7 +792,7 @@ footer{
   /* Error content display */
 
   /* Login Form */
-  .login-container {
+  .form-container {
     margin: 1% auto;
     width: 50%;
   }
@@ -757,8 +807,19 @@ footer{
     margin: 2% auto;
   }
   
+  .form-card.login-card button{
+    max-width: 60%;
+    margin: 0 auto;
+  }
 
-  /* End Login Form */
+  /* End Form style */
+
+  /* Vehicle Management Page Style */
+  .management{
+    grid-template-columns: 1fr 1fr;
+    
+  }
+  /* End Vehicle Management Page Style */
 
 
 }

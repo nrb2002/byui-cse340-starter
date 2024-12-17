@@ -12,4 +12,30 @@
 
 <!-- This is the main content to be displayed in the view -->
 
-<%- loginForm %>
+<div class="form-container">
+    <div class="form-card login-card">
+        <h2>Please enter your credentials</h2>
+        <hr>  
+        <form class="account-form" id="loginForm" action="/account/login" method="post">
+            <label for="account_email">Username</label>
+            <input type="email" id="account_email" name="account_email" placeholder="Enter your email address" value="<%= locals.account_firstname %>" required>
+        
+            <label for="account_password">Password</label>
+            <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{11,}$" id="account_password" name="account_password" placeholder="Enter your password" required>
+            
+            <div class="togglePasswd">
+                <label><input type="checkbox" onclick="togglePassword()">  Show password</label>
+            </div>
+                
+            <small>The password must contain at least 12 characters, 1 capital letter, 1 number, and 1 special character.</small>
+        
+            <button>Sign in</button>
+        
+        </form>
+        <br><br>  
+        <div>
+            <span class="form-link">Forgot password? <a href="/account/username">Click here to reset.</a></span>  |  '
+            <span class="form-link">Dont have an account? <a href="/account/register">Sign up now!</a></span>
+        </div>  
+    </div>
+</div>
