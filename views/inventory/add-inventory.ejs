@@ -29,15 +29,7 @@
         <h2>Please fill out this form to add a new inventory</h2><hr> 
 
         <form class="account-form" id="inventoryForm" action="" method="POST">
-            <label for="classification_id">Classification:</label>
-            
-            <select name="classification_id" id="classificationList" required>'
-                <option value=''>Choose a Classification</option>
-                <!-- Complete the code for the select -->
-                
-            </select>
-
-
+            <%#- classificationList %>
             
             <label for="inv_make">Make</label>
             <input type="text" id="inv_make" name="inv_make" minlength="3" pattern="^[a-zA-Z0-9äöüÄÖÜ_ ]*$" placeholder="Enter the vehicle's make" value="<%= locals.inv_make %>" required>
