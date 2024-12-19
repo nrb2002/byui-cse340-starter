@@ -43,3 +43,8 @@ function togglePassword() {
       y.type = "password";
     }
 }
+
+//Format vehicle's year
+$(function() {
+    $( "#inv_year" ).datepicker({dateFormat: 'yyyy'});
+});​

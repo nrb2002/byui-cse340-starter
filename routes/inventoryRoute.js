@@ -4,6 +4,12 @@ const router = new express.Router() //Use Express to create a router object
 const invController = require("../controllers/invController") //Import the Inventory controller
 const utilities = require("../utilities/")
 const classValidate = require("../utilities/inventory-validation") //Import the validation function
+const inventoryValidate = require("../utilities/inventory-validation") //Import the validation function
+
+
+/************************************************************************************************************ */
+/**CLASSIFICATION ROUTES */
+/************************************************************************************************************ */
 
 //Route to build inventory by Classification view
 /*
@@ -22,27 +28,40 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByI
 //Get the route sent when the 'Management' link is clicked or activated in the url
 router.get("/", utilities.handleErrors(invController.buildManagement));
 
-/***************************
- * Deliver Add Classification view  
- * *************************/ 
-//Get the route sent when the 'Management' link is clicked or activated in the url
+//Get the route sent when the 'Add Classification' link is clicked or activated in the url
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
-
-/***************************************************************************************************** */
-// POSTING DATA FROM FORMS
-/***************************************************************************************************** */
 
 /***************************
  * Post data from add classification view 
  * *************************/ 
-//Get the route sent when the 'Submit' button is clicked
+// Get the route sent when the 'Submit' button is clicked
 // Process the registration data, run the validation, and handle errors if any
 router.post(
     "/add-classification",
     classValidate.classificationRules(),
-    //classValidate.checkClassData, //Will double check later
-    utilities.handleErrors(invController.addClassification)
+    classValidate.checkClassData, //Will double check later
+    utilities.handleErrors(invController.addClassification)    
   )
+
+
+
+/***************************
+ * Deliver Add Inventory view  
+ * *************************/ 
+//Get the route sent when the 'Add Inventory' link is clicked or activated in the url
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+
+  /***************************
+ * Post data from add inventory view 
+ * *************************/ 
+//Get the route sent when the 'Submit' button is clicked
+// Process the registration data, run the validation, and handle errors if any
+router.post(
+  "/add-inventory",
+    inventoryValidate.inventoryRules(),
+    inventoryValidate.checkInvData, //Will double check later
+    utilities.handleErrors(invController.addInventory)
+)
 
 
 

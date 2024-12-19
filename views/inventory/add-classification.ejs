@@ -26,9 +26,9 @@
     <div class="form-card">
         <h2>Please fill out this form to add a new classification</h2><hr> 
 
-        <form class="account-form" id="classificationForm" action="" method="post">
+        <form class="account-form" id="classificationForm" action="" method="POST">
             <label for="classification_name">Classification Name</label>
-            <input type="text" id="classification_name" name="classification_name" minlength="3" pattern="^[a-zA-Z0-9äöüÄÖÜ]*$" placeholder="Enter Classification Name" value="<%= locals.classification_name %>" required>
+            <input type="text" id="classification_name" name="classification_name" minlength="3" pattern="^[a-zA-Z0-9äöüÄÖÜ_ ]*$" placeholder="Enter Classification Name" value="<%= locals.classification_name %>" required>
             <small>The classification name cannot contain a space or special character.</small>
             <button>Submit</button>
         </form>

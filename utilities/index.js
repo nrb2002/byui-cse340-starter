@@ -81,6 +81,41 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
+* Build the classification list for a select input
+* ************************************ */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList = '<label for="classification_id">Classification</label>'
+    classificationList += '<select name="classification_id" id="classificationList" required>'
+      classificationList += "<option value=''>Choose a Classification</option>"
+      
+      data.rows.forEach((row) => {
+      classificationList += '<option value="' + row.classification_id + '"'
+      if (
+        classification_id != null &&
+        row.classification_id == classification_id
+      ) {
+        classificationList += " selected "
+      }
+      classificationList += ">" + row.classification_name + "</option>"
+    })
+    classificationList += "</select>"
+    
+    classificationList += "<button>Submit</button>"
+    classificationList += "</form>"
+    classificationList += '<div class="form-link"><a href="/inv" >Go back to the Vehicle Management page.</a></div>'
+    
+    classificationList += "</div>"
+    classificationList += "</div>"
+
+
+
+  return classificationList
+}
+
+
+
+/* **************************************
 * Build the Inventory Detail view HTML
 * ************************************ */
 //Build an asynchronous function that creates a grid for data returned as an array

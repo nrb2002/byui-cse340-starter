@@ -18,7 +18,7 @@ async function getClassifications(){
 }
 
 /* **********************
- *   Check for existing classification
+ *   Check for existing classification before inserting
  * ********************* */
 /*
 Hopefully, this function looks familiar. 
@@ -27,8 +27,8 @@ It queries the database to see if a record exists with the same email that is be
 async function checkExistingClassification(classification_name){
   try {
     const sql = "SELECT * FROM public.classification WHERE classification_name = $1"
-    const classification_name = await pool.query(sql, [classification_name])
-    return classification_name.rowCount
+    const className = await pool.query(sql, [classification_name])
+    return className.rowCount
   } catch (error) {
     return error.message
   }
@@ -37,10 +37,39 @@ async function checkExistingClassification(classification_name){
 /* *****************************
 *   Insert new classification
 * *************************** */
-async function addClassification(classification_name){
+async function insertClassification(classification_name){
   try {
     const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
     return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Check for existing classification before inserting
+ * ********************* */
+/*
+Hopefully, this function looks familiar. 
+It queries the database to see if a record exists with the same email that is being submitted. It returns the count of rows found. Anything greater than zero means the email already exists in the database.
+*/
+async function checkExistingInventory(inv_model){
+  try {
+    const sql = "SELECT * FROM public.inventory WHERE inv_model = $1"
+    const invModel = await pool.query(sql, [inv_model])
+    return invModel.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* *****************************
+*   Insert new classification
+* *************************** */
+async function insertInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id){
+  try {
+    const sql = "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+    return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id])
   } catch (error) {
     return error.message
   }
@@ -87,5 +116,7 @@ module.exports = {
   getInventoryByClassificationId, 
   getItemByInventoryId, 
   checkExistingClassification, 
-  addClassification
+  checkExistingInventory,
+  insertClassification,
+  insertInventory
 };

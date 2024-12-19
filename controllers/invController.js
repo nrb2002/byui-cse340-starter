@@ -32,6 +32,23 @@ invCont.buildAddClassification = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build Add Inventory view
+ * ************************** */
+//Create an asynchronous function that returns the management view
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav() 
+    
+  //calls the Express render function to return a view to the browser
+  res.render("./inventory/add-inventory", {
+    title: 'New Inventory',
+    nav,
+    errors: null,
+  })
+}
+
+
+
 /* ****************************************
 *  Process Classification creation
 * *************************************** */
@@ -42,7 +59,7 @@ invCont.addClassification = async function (req, res) {
   const {classification_name} = req.body
 
   //Pass the data from the form to the model to be inserted into the database
-  const classResult = await invModel.addClassification(classification_name)
+  const classResult = await invModel.insertClassification(classification_name)
 
   if (classResult) {
     //If successful insertion of data, flash confirmation message
@@ -62,6 +79,65 @@ invCont.addClassification = async function (req, res) {
     res.status(501).render("./inventory/add-classification", {
       title: "New Classification",
       nav,
+      errors: null,
+    })
+  }
+}
+
+/* ****************************************
+*  Process Inventory creation
+* *************************************** */
+invCont.addInventory = async function (req, res) {
+  let nav = await utilities.getNav()
+  
+  //Get the data from the form
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+
+  } = req.body
+
+  //Pass the data from the form to the model to be inserted into the database
+  const invResult = await invModel.insertInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+
+  if (invResult) {
+    //If successful insertion of data, flash confirmation message
+    req.flash(
+      "notice-success",
+      `Inventory <strong>${inv_make} ${inv_model}</strong> created successfully!`
+    )
+    //If successful insertion of data, go to management view
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    //If failed flash error message
+    req.flash("notice-error", "Sorry, we were unable add this new classification! Please try again. ")
+    res.status(501).render("./inventory/add-inventory", {
+      title: "New Vehicle",
+      nav,
+      classificationList,
       errors: null,
     })
   }
